@@ -1,28 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
+//https://github.com/hleivav/Garage_2
 
 namespace Garage_2.Models
 {
     public class Vehicles
-    {   
-        public string id { get; set; }
-
+    {
+        public int Id { get; set; }
         [Required]
         [StringLength(6)]
-        public string Regno { get; set; } = string.Empty;
-
+        public string RegNo { get; set; } = string.Empty;
         [Required]
-        public VehicleType VehicleType { get; set;}
-        public Color color { get; set; }
+        public VehicleType VehicleType { get; set; }
+        public Color Color { get; set; }
 
         [StringLength(20)]
-        
         public string Make { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;
 
         [Range(0,8)]
+        [Required]
         public int NoOfWheels { get; set; }
-        public DateTime ParkingStartAt { get; set; }    
-
+        [Required]
+        public DateTime PartkingStartAt { get; set; }
     }
 
 
