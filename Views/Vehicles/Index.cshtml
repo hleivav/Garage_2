@@ -1,11 +1,17 @@
 ﻿@model IEnumerable<Garage_2.Models.Vehicles>
 
 @{
-    ViewData["Title"] = "Index";
+  ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-
+  
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<p>
+<partial name=”VehiclePartial” /> 
+</p>
+
+
