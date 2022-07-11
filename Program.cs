@@ -33,7 +33,7 @@ namespace Garage_2
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Vehicle}/{action=Index}/{id?}");
+                pattern: "{controller=Vehicles}/{action=Index}/{id?}");
 
             app.Run();
         }
