@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 //https://github.com/hleivav/Garage_2
 
 namespace Garage_2.Models
@@ -8,6 +9,7 @@ namespace Garage_2.Models
         public int Id { get; set; }
         [Required]
         [StringLength(6)]
+       // [Remote]
         public string RegNo { get; set; } = string.Empty;
         [Required]
         public VehicleType VehicleType { get; set; }

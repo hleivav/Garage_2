@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage_2.Data;
 using Garage_2.Models;
+using Garage_2.Models.ViewModels;
 
 namespace Garage_2.Controllers
 {
@@ -19,11 +20,40 @@ namespace Garage_2.Controllers
             _context = context;
         }
 
-        // GET: Vehicles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Filter(string RegNo, int? vehicleType, string color)
         {
+            var model = string.IsNullOrWhiteSpace(RegNo) ?
+                                    _context.Vehicles :
+                                    _context.Vehicles.Where(m => m.RegNo!.StartsWith(RegNo));
+
+            model = vehicleType == null ?
+                             model :
+                             model.Where(m => (int)m.VehicleType == vehicleType);
+
+            model = color == null ?
+                             model :
+                             model.Where(m => m.Color.Equals(color));
+
+            return View(nameof(Index), await model.ToListAsync());
+        }
+            public async Task<IActionResult> Index()
+        {
+            return View(await _context.Vehicles?.ToListAsync());
+        }
+
+        // GET: Vehicles
+        public async Task<IActionResult> Overview()
+        {
+            var model = _context.Vehicles.Select(v => new OverviewViewModel
+            {
+                Id = v.Id,
+                RegNo = v.RegNo,
+                VehicleType = v.VehicleType,
+                PartkingStartAt = v.PartkingStartAt
+            });
+
               return _context.Vehicles != null ? 
-                          View(await _context.Vehicles.ToListAsync()) :
+                          View("VehicleOverview", await model.ToListAsync()) :
                           Problem("Entity set 'Garage_2Context.Vehicles'  is null.");
         }
 
@@ -56,10 +86,17 @@ namespace Garage_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels,PartkingStartAt")] Vehicles vehicles)
+        public async Task<IActionResult> Create([Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] Vehicles vehicles)
         {
+            //var exists = _context.Vehicles.FirstOrDefault(v => v.RegNo == vehicles.RegNo);
+            //if(exists != null)
+            //{
+            //    ModelState.AddModelError("RegNo", "Vehicle already exists");
+            //}
+
             if (ModelState.IsValid)
             {
+                vehicles.PartkingStartAt = DateTime.Now;
                 _context.Add(vehicles);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -152,6 +189,12 @@ namespace Garage_2.Controllers
             }
             
             await _context.SaveChangesAsync();
+
+            //Create reciept
+
+            //Skapa model
+            //Skicka  modelen till vyn
+
             return RedirectToAction(nameof(Index));
         }
 
