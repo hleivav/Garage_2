@@ -18,14 +18,16 @@
                 <span asp-validation-for="RegNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VehicleType" class="control-label"></label>
-                <select asp-for="VehicleType" class="form-control"></select>
-                <span asp-validation-for="VehicleType" class="text-danger"></span>
+                <label asp-for="VehicleType" class="control-label">Fordonstyp</label>
+                <select class="form-control" name="VehicleType" asp-items="@Html.GetEnumSelectList<VehicleType>()">
+                <option selected="selected" value="">Välj typ av fordon</option>
+            </select>
             </div>
             <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <select asp-for="Color" class="form-control"></select>
-                <span asp-validation-for="Color" class="text-danger"></span>
+                <label asp-for="VehicleType" class="control-label">Color</label>
+                <select class="form-control" name="VehicleType" asp-items="@Html.GetEnumSelectList<Color>()">
+                <option selected="selected" value="">Välj typ av fordon</option>
+            </select>
             </div>
             <div class="form-group">
                 <label asp-for="Make" class="control-label"></label>
