@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Vehicles>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Välkommen till Garage 2.0</h1>
+
+<p>
+    <a asp-action="Create">Parkera</a>
+@*        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary" asp-action="Create">Parkera</button>
+        </div>*@
+</p>
+
+
+<partial name="VehiclePartial" />
+
+

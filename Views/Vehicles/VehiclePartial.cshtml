@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Garage_2.Models.Vehicles>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                RegNr
+            </th>
+            <th>
+                Fordonstyp
+            </th>
+            <th>
+                Färg
+            </th>
+            <th>
+                Märke
+            </th>
+            <th>
+                Modell
+            </th>
+            <th>
+                Antal hjul
+            </th>
+            <th>
+                Parkeringstid
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoOfWheels)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PartkingStartAt)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Lägg till/Ändra</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Checka ut</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<OverviewViewModel>
+
+@{
+    ViewData["Title"] = "Overview";
+}
+
+<h1>Välkommen till Garage 2.0</h1>
+
+<p>
+    <a asp-action="Create">Parkera</a>
+@*        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary" asp-action="Create">Parkera</button>
+        </div>*@
+</p>
+
+<form asp-action="Filter" asp-controller="Vehicles" method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="title" placeholder="Sök ett fordon"/>
+        <div class="input-group-append">
+            <select class="form-control" name="VehicleType" asp-items="@Html.GetEnumSelectList<VehicleType>()">
+                <option selected="selected" value="">Välj typ av fordon</option>
+            </select>
+            <select class="form-control" name="Color" asp-items="@Html.GetEnumSelectList<Color>()">
+                <option selected="selected" value="">Välj fordonets färg</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Sök</button>
+        </div>
+
+</form>
+
+
+<partial name="VehiclePartial2" />
