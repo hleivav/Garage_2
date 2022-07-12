@@ -20,19 +20,19 @@ namespace Garage_2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Filter(string RegNo, int? vehicleType, string color)
+        public async Task<IActionResult> Filter(string RegNo/*, int? vehicleType, string color*/)
         {
             var model = string.IsNullOrWhiteSpace(RegNo) ?
                                     _context.Vehicles :
                                     _context.Vehicles.Where(m => m.RegNo!.StartsWith(RegNo));
 
-            model = vehicleType == null ?
-                             model :
-                             model.Where(m => (int)m.VehicleType == vehicleType);
+            //model = vehicleType == null ?
+            //                 model :
+            //                 model.Where(m => (int)m.VehicleType == vehicleType);
 
-            model = color == null ?
-                             model :
-                             model.Where(m => m.Color.Equals(color));
+            //model = color == null ?
+            //                 model :
+            //                 model.Where(m => m.Color.Equals(color));
 
             return View(nameof(Index), await model.ToListAsync());
         }
@@ -111,7 +111,7 @@ namespace Garage_2.Controllers
             {
                 return NotFound();
             }
-
+            
             var vehicles = await _context.Vehicles.FindAsync(id);
             if (vehicles == null)
             {
@@ -125,7 +125,7 @@ namespace Garage_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels,PartkingStartAt")] Vehicles vehicles)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] Vehicles vehicles)
         {
             if (id != vehicles.Id)
             {
@@ -137,6 +137,7 @@ namespace Garage_2.Controllers
                 try
                 {
                     _context.Update(vehicles);
+                    _context.Entry(vehicles).Property(v => v.PartkingStartAt).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -187,6 +188,8 @@ namespace Garage_2.Controllers
             {
                 _context.Vehicles.Remove(vehicles);
             }
+
+
             
             await _context.SaveChangesAsync();
 
@@ -194,7 +197,7 @@ namespace Garage_2.Controllers
 
             //Skapa model
             //Skicka  modelen till vyn
-
+            
             return RedirectToAction(nameof(Index));
         }
 

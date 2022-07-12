@@ -4,13 +4,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RegNo)
+                RegNr
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
+                Fordonstyp
             </th> 
             <th>
-                @Html.DisplayNameFor(model => model.PartkingStartAt)
+                Parkeringstid
             </th>
             <th></th>
         </tr>
@@ -28,9 +28,9 @@
                 @Html.DisplayFor(modelItem => item.PartkingStartAt)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Lägg till/Ändra</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Checka ut</a>
             </td>
         </tr>
 }

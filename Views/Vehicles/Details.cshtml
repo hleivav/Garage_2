@@ -4,50 +4,50 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detaljer</h1>
 
 <div>
-    <h4>Vehicles</h4>
+    <h4>Fordon</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegNo)
+            RegNr
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RegNo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VehicleType)
+            Fordonstyp
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.VehicleType)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
+            Färg
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Color)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Make)
+            Märke
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Make)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Model)
+            Modell
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Model)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NoOfWheels)
+            Antal hjul
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NoOfWheels)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PartkingStartAt)
+            Parkeringstid
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PartkingStartAt)
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Lägg till /Ändra</a> |
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>

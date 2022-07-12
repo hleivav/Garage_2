@@ -8,11 +8,19 @@
 
 <p>
     <a asp-action="Create">Parkera</a>
+    <a asp-action="Overview">Förenklad vy</a>
 @*        <div class="input-group-append">
             <button type="submit" class="btn btn-primary" asp-action="Create">Parkera</button>
         </div>*@
 </p>
-
+<form asp-action="Filter" asp-controller="Vehicles" method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="title" placeholder="Sök ett fordon"/>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Sök</button>
+        </div>
+    </div>
+</form>
 
 <partial name="VehiclePartial" />
 
