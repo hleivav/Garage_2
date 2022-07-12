@@ -9,7 +9,9 @@ namespace Garage_2.Models
         public int Id { get; set; }
         [Required]
         [StringLength(6)]
-       // [Remote]
+        //[REMOTE]
+
+
         public string RegNo { get; set; } = string.Empty;
         [Required]
         public VehicleType VehicleType { get; set; }
@@ -19,7 +21,7 @@ namespace Garage_2.Models
         public string Make { get; set; } = string.Empty;
         public string Model { get; set; } = string.Empty;
 
-        [Range(0,8)]
+        [Range(0, 8)]
         [Required]
         public int NoOfWheels { get; set; }
         [Required]

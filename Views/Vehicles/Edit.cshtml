@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Edit";
+    
 }
 
 <h1>Lägg till / Ändra</h1>
 
-<h4>Vehicles</h4>
+<h4>Fordon</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,6 +19,13 @@
                 <input asp-for="RegNo" class="form-control" />
                 <span asp-validation-for="RegNo" class="text-danger"></span>
             </div>
+
+@*            <div class="form-group">
+                <label asp-for="VehicleType" class="control-label">Fordonstyp</label>
+                <input asp-for="VehicleType" class="form-control" />
+                <span asp-validation-for="VehicleType" class="text-danger"></span>
+            </div>*@
+
             <div class="form-group">
                 <label asp-for="VehicleType" class="control-label">Fordonstyp</label>
                 <select class="form-control" asp-for="VehicleType" asp-items="@Html.GetEnumSelectList<VehicleType>()">
@@ -29,7 +37,8 @@
                 <select class="form-control" asp-for="Color" asp-items="@Html.GetEnumSelectList<Color>()">
                 <option selected="selected" value="">Välj fordonets färg</option>
             </select>
-            </div>
+            </div>*
+           
             <div class="form-group">
                 <label asp-for="Make" class="control-label">Märke</label>
                 <input asp-for="Make" class="form-control" />
@@ -45,20 +54,22 @@
                 <input asp-for="NoOfWheels" class="form-control" />
                 <span asp-validation-for="NoOfWheels" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <br />
+@*            <div class="form-group">
                 <label asp-for="PartkingStartAt" class="control-label">Parkeringstid</label>
                 <input asp-for="PartkingStartAt" class="form-control" />
                 <span asp-validation-for="PartkingStartAt" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
+            <br />
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>
 
 @section Scripts {
