@@ -4,50 +4,50 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detaljer</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>Fordon</h4>
+    <h4>Vehicles</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            RegNr
+            @Html.DisplayNameFor(model => model.RegNo)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RegNo)
         </dd>
         <dt class = "col-sm-2">
-            Fordonstyp
+            @Html.DisplayNameFor(model => model.VehicleType)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.VehicleType)
         </dd>
         <dt class = "col-sm-2">
-            Färg
+            @Html.DisplayNameFor(model => model.Color)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Color)
         </dd>
         <dt class = "col-sm-2">
-            Märke
+            @Html.DisplayNameFor(model => model.Make)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Make)
         </dd>
         <dt class = "col-sm-2">
-            Modell
+            @Html.DisplayNameFor(model => model.Model)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Model)
         </dd>
         <dt class = "col-sm-2">
-            Antal hjul
+            @Html.DisplayNameFor(model => model.NoOfWheels)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NoOfWheels)
         </dd>
         <dt class = "col-sm-2">
-            Parkeringstid
+            @Html.DisplayNameFor(model => model.PartkingStartAt)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PartkingStartAt)
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Lägg till /Ändra</a> |
-    <a asp-action="Index">Tillbaka till listan</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
 </div>
