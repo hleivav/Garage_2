@@ -71,7 +71,7 @@ namespace Garage_2.Controllers
         //                Problem("Entity set 'Garage_2Context.Vehicles'  is null.");
         //}
 
-        public async Task<IActionResult> Receipt(int? id)
+        public async Task<IActionResult> VehicleReceipt(int? id)
         {
             if (id == null || _context.Vehicles == null)
             {
@@ -85,7 +85,18 @@ namespace Garage_2.Controllers
                 return NotFound();
             }
 
-            return View(vehicles);
+
+            //Ta bort fordonet ur databasen
+
+            //Skapa en model med den datan som ska presenteras i vyn
+            var model = new ReceiptViewModel
+            {
+                RegNo = vehicles.RegNo,
+                TotalCost = 500,
+                //mappa över all info
+            };
+
+            return View(model);
         }
 
         // GET: Vehicles/Details/5
@@ -130,6 +141,7 @@ namespace Garage_2.Controllers
                 vehicles.PartkingStartAt = DateTime.Now;
                 _context.Add(vehicles);
                 await _context.SaveChangesAsync();
+                //TempData
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicles);
@@ -149,6 +161,22 @@ namespace Garage_2.Controllers
                 return NotFound();
             }
             return View(vehicles);
+        }
+
+        [AcceptVerbs("GET")]
+        public async Task<IActionResult> CheckRegNo(string RegNo)
+        {
+            if (string.IsNullOrWhiteSpace(RegNo) || _context.Vehicles == null)
+            {
+                return NotFound();
+            }
+
+            var vehicles = await _context.Vehicles.FirstOrDefaultAsync(v => v.RegNo == RegNo);
+            if (vehicles == null)
+            {
+                return Json(true);
+            }
+            return Json(false);
         }
 
         // POST: Vehicles/Edit/5

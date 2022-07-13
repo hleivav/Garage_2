@@ -6,6 +6,13 @@
 
 <h1>Välkommen till Garage 2.0</h1>
 
+@*@if (!string.isNulorEmpty(ViewBag.Message))
+{
+<div class="alert alert-primary" role="alert">
+  @ViewBag.Message
+</div>    
+}*@
+
 <p>
     <a asp-action="Create">Parkera</a>
     <a asp-action="Overview">Förenklad vy</a>
@@ -15,15 +22,9 @@
 </p>
 <form asp-action="Filter" asp-controller="Vehicles" method="get">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" name="title" placeholder="Sök ett fordon"/>
+        <input type="text" class="form-control" name="RegNo" placeholder="Sök ett fordon"/> 
         <div class="input-group-append">
             <button type="submit" class="btn btn-primary">Sök</button>
-        </div>
-    </div>
-</form>
-
-
- <button type="submit" class="btn btn-primary">Sök</button>
         </div>
     </div>
 </form>

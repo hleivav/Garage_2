@@ -11,7 +11,7 @@ namespace Garage_2.Models
         [StringLength(6)]
         //[REMOTE]
 
-
+        [Remote("CheckRegNo", "Vehicles", ErrorMessage = "Vehicle already exists")]
         public string RegNo { get; set; } = string.Empty;
         [Required]
         public VehicleType VehicleType { get; set; }
