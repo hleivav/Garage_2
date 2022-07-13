@@ -30,7 +30,7 @@ namespace Garage_2
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Vehicles}/{action=Index}/{id?}");

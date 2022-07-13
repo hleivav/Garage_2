@@ -20,23 +20,23 @@ namespace Garage_2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Filter(string RegNo, int? vehicleType, string color)
+        public async Task<IActionResult> Filter(string RegNo/*, int? vehicleType, string color*/)
         {
             var model = string.IsNullOrWhiteSpace(RegNo) ?
                                     _context.Vehicles :
                                     _context.Vehicles.Where(m => m.RegNo!.StartsWith(RegNo));
 
-            model = vehicleType == null ?
-                             model :
-                             model.Where(m => (int)m.VehicleType == vehicleType);
+            //model = vehicleType == null ?
+            //                 model :
+            //                 model.Where(m => (int)m.VehicleType == vehicleType);
 
-            model = color == null ?
-                             model :
-                             model.Where(m => m.Color.Equals(color));
+            //model = color == null ?
+            //                 model :
+            //                 model.Where(m => m.Color.Equals(color));
 
             return View(nameof(Index), await model.ToListAsync());
         }
-            public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             return View(await _context.Vehicles?.ToListAsync());
         }
@@ -52,9 +52,9 @@ namespace Garage_2.Controllers
                 PartkingStartAt = v.PartkingStartAt
             });
 
-              return _context.Vehicles != null ? 
-                          View("VehicleOverview", await model.ToListAsync()) :
-                          Problem("Entity set 'Garage_2Context.Vehicles'  is null.");
+            return _context.Vehicles != null ?
+                        View("VehicleOverview", await model.ToListAsync()) :
+                        Problem("Entity set 'Garage_2Context.Vehicles'  is null.");
         }
 
         //public async Task<IActionResult> Receipt(int? id)
@@ -156,7 +156,7 @@ namespace Garage_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels,PartkingStartAt")] Vehicles vehicles)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] Vehicles vehicles)
         {
             if (id != vehicles.Id)
             {
@@ -168,6 +168,7 @@ namespace Garage_2.Controllers
                 try
                 {
                     _context.Update(vehicles);
+                    _context.Entry(vehicles).Property(v => v.PartkingStartAt).IsModified = false;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -218,7 +219,9 @@ namespace Garage_2.Controllers
             {
                 _context.Vehicles.Remove(vehicles);
             }
-            
+
+
+
             await _context.SaveChangesAsync();
 
             //Create reciept
@@ -231,7 +234,7 @@ namespace Garage_2.Controllers
 
         private bool VehiclesExists(int id)
         {
-          return (_context.Vehicles?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Vehicles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
