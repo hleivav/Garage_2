@@ -26,6 +26,7 @@ namespace Garage_2.Models
         public int NoOfWheels { get; set; }
         [Required]
         public DateTime PartkingStartAt { get; set; }
+        //
     }
 
 
