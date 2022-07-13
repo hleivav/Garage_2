@@ -57,6 +57,37 @@ namespace Garage_2.Controllers
                           Problem("Entity set 'Garage_2Context.Vehicles'  is null.");
         }
 
+        //public async Task<IActionResult> Receipt(int? id)
+        //{
+        //    var model = _context.Vehicles.Select(v => new ReceiptViewModel
+        //    {
+        //        Id = v.Id,
+        //        RegNo = v.RegNo,
+        //        PartkingStartAt = v.PartkingStartAt,
+        //    });
+
+        //    return _context.Vehicles != null ?
+        //                View("VehicleOverview", await model.ToListAsync()) :
+        //                Problem("Entity set 'Garage_2Context.Vehicles'  is null.");
+        //}
+
+        public async Task<IActionResult> Receipt(int? id)
+        {
+            if (id == null || _context.Vehicles == null)
+            {
+                return NotFound();
+            }
+
+            var vehicles = await _context.Vehicles
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (vehicles == null)
+            {
+                return NotFound();
+            }
+
+            return View(vehicles);
+        }
+
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {

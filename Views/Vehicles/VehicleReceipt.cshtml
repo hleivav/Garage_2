@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ReceiptViewModel>
+
+@{
+    ViewData["Title"] = "Receipt";
+}
+
+<h1>Kvitto</h1>
+
+<div>
+    <h4>Fordon</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            RegNr
+        </dt>
+        <dd class = "col-sm-10">
+            @*@Html.DisplayFor(model => model.RegNo)*@
+        </dd>
+        <dt class = "col-sm-2">
+            Parkerat kl
+        </dt>
+        <dd class = "col-sm-10">
+            @*@Html.DisplayFor(model => model.PartkingStartAt)*@
+        </dd>
+        <dt class = "col-sm-2">
+            Checkat ut kl
+        </dt>
+        <dd class = "col-sm-10">
+            @*@Html.DisplayFor(model => model.ParkingEndsAt)*@
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Tillbaka till listan</a>
+</div>
