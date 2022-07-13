@@ -104,6 +104,16 @@ namespace Garage_2.Controllers
                 //mappa över all info
             };
 
+            _context.Vehicles.Remove(vehicles);
+            await _context.SaveChangesAsync();
+
+            //Create reciept
+
+            //Skapa model
+            //Skicka  modelen till vyn
+
+            //return RedirectToAction(nameof(Index));
+
             return View("View", model);
         }
 

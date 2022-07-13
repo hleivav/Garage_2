@@ -16,9 +16,9 @@ namespace Garage_2.Models.ViewModels
         public DateTime PartkingStartAt { get; set; }
         
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        [Display(Name = "Pris per påbörjad timme")]
+        [Display(Name = "Pris per timme")]
         public float CostForHour { get; set; } = 40;
-        [Display(Name = "Parkerad tid i minuter")]
+        [Display(Name = "Parkerad tid i timmar")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{00:hh}")]
         public TimeSpan ParkedTime { get; set; }
        
