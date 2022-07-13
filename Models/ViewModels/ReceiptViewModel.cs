@@ -5,19 +5,25 @@ namespace Garage_2.Models.ViewModels
 {
     public class ReceiptViewModel
     {
-            public int Id { get; set; }
+        public int Id { get; set; }
 
-            [Required]
-            [StringLength(6)]
-            public string RegNo { get; set; } = string.Empty;
-            [Required]
-            public DateTime PartkingStartAt { get; set; }
-            public int CostForHour { get; set; } = 40;
-       // [DisplayFormat()]
-            public TimeSpan ParkedTime { get; set; }
+        [Required]
+        [StringLength(6)]
+        [Display(Name = "Registreringsnummer")]
+        public string RegNo { get; set; } = string.Empty;
+        [Required]
+        [Display(Name = "Parkeringen startades")]
+        public DateTime PartkingStartAt { get; set; }
+        
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        [Display(Name = "Pris per påbörjad timme")]
+        public float CostForHour { get; set; } = 40;
+        [Display(Name = "Parkerad tid i minuter")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{00:hh}")]
+        public TimeSpan ParkedTime { get; set; }
        
         [Display(Name ="Total kostnad")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public double TotalCost { get;  set; }
-        //public DateTime TimeElapsed { get; set; } = DateTime.Now;
     }
 }
