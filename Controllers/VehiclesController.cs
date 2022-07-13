@@ -97,22 +97,12 @@ namespace Garage_2.Controllers
                 PartkingStartAt = vehicles.PartkingStartAt,
                 ParkedTime = DateTime.Now.Subtract(vehicles.PartkingStartAt),
                 TotalCost = totalCost,
-
-
-                //TimeElapsed = vehicles.TimeElapsed
-
-                //mappa över all info
             };
 
             _context.Vehicles.Remove(vehicles);
             await _context.SaveChangesAsync();
 
-            //Create reciept
-
-            //Skapa model
-            //Skicka  modelen till vyn
-
-            //return RedirectToAction(nameof(Index));
+            TempData["deleteMessage"] = "Fordonet har parkerats korrekt";
 
             return View("View", model);
         }
@@ -148,18 +138,13 @@ namespace Garage_2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] Vehicles vehicles)
         {
-            //var exists = _context.Vehicles.FirstOrDefault(v => v.RegNo == vehicles.RegNo);
-            //if(exists != null)
-            //{
-            //    ModelState.AddModelError("RegNo", "Vehicle already exists");
-            //}
 
             if (ModelState.IsValid)
             {
                 vehicles.PartkingStartAt = DateTime.Now;
                 _context.Add(vehicles);
                 await _context.SaveChangesAsync();
-                //TempData
+                TempData["saveMessage"] = "Fordonet har parkerats";////////TEMP//////////////////
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicles);
@@ -201,7 +186,7 @@ namespace Garage_2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] // testade att ta bort den här men den verkar inte validera om fordonet finns.//////////
         public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] Vehicles vehicles)
         {
             if (id != vehicles.Id)
@@ -216,6 +201,8 @@ namespace Garage_2.Controllers
                     _context.Update(vehicles);
                     _context.Entry(vehicles).Property(v => v.PartkingStartAt).IsModified = false;
                     await _context.SaveChangesAsync();
+                    //TempData////////////////////////////////////////////////////////////////
+                    TempData["editMessage"] = "Ändringarna har genomförts";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -270,11 +257,7 @@ namespace Garage_2.Controllers
 
             await _context.SaveChangesAsync();
 
-            //Create reciept
-
-            //Skapa model
-            //Skicka  modelen till vyn
-
+            TempData["deleteMessage"] = "Fordonet har parkerats korrekt";
             return RedirectToAction(nameof(Index));
         }
 
