@@ -15,6 +15,6 @@ namespace Garage_2.Models.ViewModels
             [Required]
             public DateTime PartkingStartAt { get; set; }
         public int TotalCost { get;  set; }
-        //public DateTime ParkingEndsAt { get; set; } = DateTime.Now;
+        //public DateTime ParkingEndsAt { get; set; } = DateTime.Now
     }
 }
