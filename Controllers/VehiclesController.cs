@@ -87,16 +87,24 @@ namespace Garage_2.Controllers
 
 
             //Ta bort fordonet ur databasen
+            var parkedTime = DateTime.Now.Subtract(vehicles.PartkingStartAt);
+            var totalCost = parkedTime.TotalHours * 40;
 
             //Skapa en model med den datan som ska presenteras i vyn
             var model = new ReceiptViewModel
             {
                 RegNo = vehicles.RegNo,
-                TotalCost = 500,
+                PartkingStartAt = vehicles.PartkingStartAt,
+                ParkedTime = DateTime.Now.Subtract(vehicles.PartkingStartAt),
+                TotalCost = totalCost,
+
+
+                //TimeElapsed = vehicles.TimeElapsed
+
                 //mappa över all info
             };
 
-            return View(model);
+            return View("View", model);
         }
 
         // GET: Vehicles/Details/5
