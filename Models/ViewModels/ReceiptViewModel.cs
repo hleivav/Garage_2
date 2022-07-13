@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Garage_2.Models.ViewModels
 {
@@ -10,11 +11,13 @@ namespace Garage_2.Models.ViewModels
             [StringLength(6)]
             public string RegNo { get; set; } = string.Empty;
             [Required]
-            public VehicleType VehicleType { get; set; }
-
-            [Required]
             public DateTime PartkingStartAt { get; set; }
-        public int TotalCost { get;  set; }
-        //public DateTime ParkingEndsAt { get; set; } = DateTime.Now;
+            public int CostForHour { get; set; } = 40;
+       // [DisplayFormat()]
+            public TimeSpan ParkedTime { get; set; }
+       
+        [Display(Name ="Total kostnad")]
+        public double TotalCost { get;  set; }
+        //public DateTime TimeElapsed { get; set; } = DateTime.Now;
     }
 }

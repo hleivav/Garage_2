@@ -20,14 +20,26 @@
             Parkerat kl
         </dt>
         <dd class = "col-sm-10">
-            @*@Html.DisplayFor(model => model.PartkingStartAt)*@
+            @Html.DisplayFor(model => model.PartkingStartAt)
         </dd>
         <dt class = "col-sm-2">
             Checkat ut kl
         </dt>
         <dd class = "col-sm-10">
-            @*@Html.DisplayFor(model => model.ParkingEndsAt)*@
+            @Html.DisplayFor(model => model.ParkedTime)
         </dd>
+        <dt class = "col-sm-2">
+            Pris per timme
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CostForHour)
+        </dd>
+        <dt class = "col-sm-2">
+            Tid parkerat
+        </dt>
+@*        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeElapsed)
+        </dd>*@
     </dl>
 </div>
 <div>

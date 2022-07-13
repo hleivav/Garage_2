@@ -6,6 +6,8 @@ namespace Garage_2.Models
 {
     public class Vehicles
     {
+        internal DateTime time;
+
         public int Id { get; set; }
         [Required]
         [StringLength(6)]
@@ -26,6 +28,7 @@ namespace Garage_2.Models
         public int NoOfWheels { get; set; }
         [Required]
         public DateTime PartkingStartAt { get; set; }
+      //  public DateTime TimeElapsed { get; internal set; }
     }
 
 
