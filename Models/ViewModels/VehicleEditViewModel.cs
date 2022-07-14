@@ -1,19 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 //https://github.com/hleivav/Garage_2
 
-namespace Garage_2.Models
+namespace Garage_2.Models.ViewModels
 {
-    public class Vehicles
+    public class VehicleEditViewModel
     {
         internal DateTime time;
 
         public int Id { get; set; }
         [Required]
         [StringLength(6)]
-        //[REMOTE]
-
-        [Remote("CheckRegNo", "Vehicles", ErrorMessage = "Vehicle already exists")]
         public string RegNo { get; set; } = string.Empty;
         [Required]
         public VehicleType VehicleType { get; set; }
@@ -28,8 +24,8 @@ namespace Garage_2.Models
         public int NoOfWheels { get; set; }
         [Required]
         public DateTime PartkingStartAt { get; set; }
-      //  public DateTime TimeElapsed { get; internal set; }
-    } 
+        //  public DateTime TimeElapsed { get; internal set; }
+    }
 
 
 }

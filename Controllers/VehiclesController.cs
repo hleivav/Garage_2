@@ -163,7 +163,19 @@ namespace Garage_2.Controllers
             {
                 return NotFound();
             }
-            return View(vehicles);
+
+            //-------------
+            var model = new VehicleEditViewModel
+            {
+                Id = vehicles.Id,
+                RegNo = vehicles.RegNo,
+                VehicleType = vehicles.VehicleType, 
+                Color = vehicles.Color,
+                Make = vehicles.Make,
+                Model = vehicles.Model,
+                NoOfWheels = vehicles.NoOfWheels
+            };
+            return View(model);
         }
 
         [AcceptVerbs("GET")]
@@ -187,9 +199,9 @@ namespace Garage_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken] // testade att ta bort den här men den verkar inte validera om fordonet finns.//////////
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] Vehicles vehicles)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RegNo,VehicleType,Color,Make,Model,NoOfWheels")] VehicleEditViewModel viewmodel)
         {
-            if (id != vehicles.Id)
+            if (id != viewmodel.Id)
             {
                 return NotFound();
             }
@@ -198,15 +210,27 @@ namespace Garage_2.Controllers
             {
                 try
                 {
-                    _context.Update(vehicles);
-                    _context.Entry(vehicles).Property(v => v.PartkingStartAt).IsModified = false;
+                    //------------
+                    var vehicle = new VehicleEditViewModel
+                    {
+                        Id=viewmodel.Id,
+                        RegNo = viewmodel.RegNo,
+                        VehicleType = viewmodel.VehicleType,
+                        Color = viewmodel.Color,
+                        Make = viewmodel.Make,
+                        Model = viewmodel.Model,
+                        NoOfWheels = viewmodel.NoOfWheels
+                    };
+                    _context.Update(vehicle);
+                    _context.Entry(vehicle).Property(v => v.PartkingStartAt).IsModified = false;
+                    _context.Entry(vehicle).Property(v => v.RegNo).IsModified = false;
                     await _context.SaveChangesAsync();
                     //TempData////////////////////////////////////////////////////////////////
                     TempData["editMessage"] = "Ändringarna har genomförts";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VehiclesExists(vehicles.Id))
+                    if (!VehiclesExists(viewmodel.Id))
                     {
                         return NotFound();
                     }
@@ -217,7 +241,7 @@ namespace Garage_2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(vehicles);
+            return View(viewmodel);
         }
 
         // GET: Vehicles/Delete/5
